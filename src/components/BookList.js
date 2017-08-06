@@ -12,6 +12,11 @@ class BookList extends Component {
         books: []
     };
 
+    constructor(props){
+        super(props);
+        this.handleOnShelfChange = this.handleOnShelfChange.bind(this);
+    }
+
     componentDidMount() {
         BooksAPI.getAll().then((books) => {
             this.setState({books});
@@ -48,13 +53,13 @@ class BookList extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <Bookshelf onShelfChange={this.handleOnShelfChange.bind(this)}
+                        <Bookshelf onShelfChange={this.handleOnShelfChange}
                                    title="Currently Reading"
                                    books={this.filterByShelf(books, 'currentlyReading')}/>
-                        <Bookshelf onShelfChange={this.handleOnShelfChange.bind(this)}
+                        <Bookshelf onShelfChange={this.handleOnShelfChange}
                                    title="Want to Read"
                                    books={this.filterByShelf(books, 'wantToRead')}/>
-                        <Bookshelf onShelfChange={this.handleOnShelfChange.bind(this)}
+                        <Bookshelf onShelfChange={this.handleOnShelfChange}
                                    title="Read"
                                    books={this.filterByShelf(books, 'read')}/>
                     </div>
