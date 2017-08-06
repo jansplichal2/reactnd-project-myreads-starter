@@ -9,6 +9,7 @@ class Book extends Component {
     render() {
         const {title, authors, thumbnail, shelf, bookId, onShelfChange} = this.props;
         const imageUrl = `url("${thumbnail}")`;
+        const initializedAuthors = authors || [];
 
         return (
             <div className="book">
@@ -19,7 +20,7 @@ class Book extends Component {
                     <ShelfChanger bookId={bookId} shelf={shelf} onShelfChange={onShelfChange}/>
                 </div>
                 <div className="book-title">{title}</div>
-                <div className="book-authors">{authors.join(", ")}</div>
+                <div className="book-authors">{initializedAuthors.join(", ")}</div>
             </div>
         );
     }
@@ -28,7 +29,7 @@ class Book extends Component {
 Book.propTypes = {
     title: PropTypes.string.isRequired,
     bookId: PropTypes.string.isRequired,
-    authors: PropTypes.array.isRequired,
+    authors: PropTypes.array,
     thumbnail: PropTypes.string.isRequired,
     onShelfChange: PropTypes.func.isRequired,
     shelf: PropTypes.oneOf(['currentlyReading', 'wantToRead', 'read', 'none']).isRequired

@@ -21,6 +21,7 @@ class Search extends Component {
     findBooks(query) {
         Promise.all([BooksAPI.search(query, 20), BooksAPI.getAll()])
             .then(([searchBooks, shelfBooks]) => {
+                //console.log("Books found by search", searchBooks);
                 const shelves = _.mapKeys(shelfBooks, 'id');
                 //console.log(shelves);
                 let mergedBooks = searchBooks.map((book) => {
@@ -30,7 +31,9 @@ class Search extends Component {
                 });
                 this.setState({books: mergedBooks});
             }).catch((err) => {
-            this.setState({books: []});
+                console.log("Error while searching", err);
+                this.setState({books: []}
+            );
         });
     }
 
